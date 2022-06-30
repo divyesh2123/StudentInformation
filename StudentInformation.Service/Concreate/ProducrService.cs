@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using StudentInformation.BussinessEntity;
 using StudentInformation.Repositroy.Concreate;
+using StudentInformation.Repositroy.Interface;
 using StudentInformation.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -12,22 +13,29 @@ namespace StudentInformation.Service.Concreate
 {
     public class ProducrService : IProducrService
     {
-        public ProductRepositroy productRepositroy {get; set;}
-        public ProducrService()
+        public IProductRepositroy productRepositroy {get; set;}
+        public ProducrService(IProductRepositroy _productRepositroy)
         {
-            productRepositroy = new ProductRepositroy();    
+            productRepositroy = _productRepositroy;    
 
         }
         public List<ProductViewModel> GetProducts()
         {
-            var productViewModel = new List<ProductViewModel>();
+            
             var mydata = productRepositroy.GetProducts();
 
-            
-            //auto mapper is 
-            IList<ProductViewModel> data = Mapper.Map<IList<DomainEntity.Product>, IList<ProductViewModel>>(mydata);
+            var mynewData = mydata.Select(y => new ProductViewModel
+            {
+                CategoryID = y.CategoryID.Value,
+                ProductDescription = y.ProductName,
+                ProductName = y.ProductName,
+                ProductID = y.ProductID
+                
 
-            return productViewModel;
+            }).ToList();
+            
+
+            return mynewData;
 
         }
     }

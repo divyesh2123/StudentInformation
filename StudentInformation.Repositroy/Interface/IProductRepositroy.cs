@@ -10,7 +10,7 @@ namespace StudentInformation.Repositroy.Interface
     /// <summary>
     /// Product Info
     /// </summary>
-    internal interface IProductRepositroy
+    public interface IProductRepositroy
     {
         List<Product> GetProducts();
     }

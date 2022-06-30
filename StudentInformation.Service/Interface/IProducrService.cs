@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StudentInformation.Service.Interface
 {
-    internal interface IProducrService
+    public interface IProducrService
     {
         List<ProductViewModel> GetProducts();
     }
