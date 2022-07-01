@@ -22,9 +22,34 @@ namespace StudentInformation.Controllers
 
         [Route("getProduct")]
         [HttpGet]
-        public List<ProductViewModel> getAllProduct()
+        public List<ProductViewModel> getAllProduct(int productID)
         {
             return producrService.GetProducts();
+        }
+
+        [Route("addProduct")]
+        [HttpPost]
+        public bool addProductInfo([FromBody] ProductViewModel productViewModel)
+        {
+
+
+            return producrService.AddProduct(productViewModel);
+        }
+
+        [Route("deleteProduct")]
+        [HttpDelete]
+        public bool deleteProductInfo(int productId)
+        {
+
+            return producrService.DeleteProduct(productId);
+        }
+
+        [Route("updateProductInfo")]
+        [HttpPut]
+        public bool UpdateProductInfo([FromBody]ProductViewModel productViewModel, [FromUri] int productId)
+        {
+
+            return producrService.UpdateProduct(productViewModel, productId);
         }
 
 

@@ -13,5 +13,12 @@ namespace StudentInformation.Repositroy.Interface
     public interface IProductRepositroy
     {
         List<Product> GetProducts();
+
+        bool AddProduct(Product product);
+
+        bool DeleteProduct(int productId);
+
+        bool UpdateProduct(Product product, int productId);
+
     }
 }
