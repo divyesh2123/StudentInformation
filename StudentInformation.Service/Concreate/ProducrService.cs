@@ -27,7 +27,7 @@ namespace StudentInformation.Service.Concreate
 
             var mynewData = mydata.Select(y => new ProductViewModel
             {
-                CategoryID = y.CategoryID.Value,
+               
                 ProductDescription = y.ProductName,
                 ProductName = y.ProductName,
                 ProductID = y.ProductID

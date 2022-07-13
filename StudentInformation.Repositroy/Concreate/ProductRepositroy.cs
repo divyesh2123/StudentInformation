@@ -46,7 +46,11 @@ namespace StudentInformation.Repositroy.Concreate
             using (NorthwindEntities northwindEntities = new NorthwindEntities())
             {
 
-                products = northwindEntities.Products.ToList();
+               
+
+                 products = northwindEntities.Products.OrderBy(y => y.ProductID).Take(5).Skip(0).ToList();
+
+
 
             }
 
