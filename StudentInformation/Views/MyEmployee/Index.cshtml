@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div id="test"></div>
+
+
+
+
+    <input type="text" value="" name="ProductName" id="ProductName" />
+
+    <input type="text" value="" name="ProductName" id="ProductDescription" />
+
+    <input type="text" name="birthDate" id="birthDate" />
+
+    <input type="button" value="Save" id="save"/>
+
+
+  <script src="~/Scripts/jquery-ui.js"></script>
+
+<script>
+
+
+
+   
+
+
+    function AddData() {
+
+        var obj = {
+
+            ProductName: $("#ProductName").val(),
+            ProductDescription: $("#ProductDescription").val()
+
+
+
+        }
+
+        console.log(obj);
+
+        $.ajax({
+            type: "POST",
+            url: "/api/product/addProduct",
+            data: JSON.stringify(obj),
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                //data will be json array of object
+                //indivisulal data would be a singal object
+
+                alert("You have added the data")
+             
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+
+
+
+    }
+
+    $(document).ready(function () {
+
+        $('#birthDate').datepicker({
+            dateFormat: "dd/M/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+
+
+        var myData = 1;
+        $.ajax({
+            type: "GET",
+            url: "/api/product/getProduct?id="+ myData,
+            dataType: "json",
+            success: function (data) {
+                //data will be json array of object
+                //indivisulal data would be a singal object
+                var myHtml= ""
+                $.each(data, function (key, idata) {
+
+                    myHtml += "<div>" + idata.ProductName +  "</div>";
+
+                })
+
+                   //you need display all data of product in table foramt
+                // delete and edit
+                // when click on delete it should delete record from both api and table
+                // when you edit it should edit the record and rem
+
+
+                //document.getElementById("test").innerHTML = myHtml;
+
+                $("#test").html(myHtml);
+                
+            },
+            error: function () {
+                alert("Error occured!!")
+            }
+        });
+
+
+        
+
+
+    });
+
+    $("#save").click(function () {
+
+        AddData();
+
+
+    })
+
+
+
+
+
+</script>
+

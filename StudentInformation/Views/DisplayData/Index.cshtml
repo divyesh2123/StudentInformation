@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="container">
+    <br />
+    <div style="width:90%; margin:0 auto;">
+        <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ProductID</th>
+                    <th>ProductName</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<script>
+    //CRUD operation in jquery datatable
+
+    $(document).ready(function () {
+        $("#demoGrid").DataTable({
+
+            "processing": true, // for show progress bar
+            "serverSide": false, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 5,
+            
+
+            "ajax": {
+                "url": "/api/product/getProduct",
+                "type": "GET",
+                "datatype": "json",
+                "dataSrc": function (data) {
+
+                    console.log(data)
+                    return data;
+                }
+            },
+
+
+
+            "columns": [
+                { "data": "ProductID", "name": "ProductID", "autoWidth": true },
+                { "data": "ProductName", "name": "ProductName", "autoWidth": true },
+                {
+                    "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.ProductID + '">Edit</a>'; }
+                },
+                {
+                    data: null, render: function (data, type, row) {
+                        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.ProductID + "'); >Delete</a>";
+                    }
+                },
+
+
+
+            ]
+
+        });
+    });
+</script>
+
+
+
+

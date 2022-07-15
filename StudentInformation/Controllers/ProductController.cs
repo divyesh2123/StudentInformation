@@ -1,4 +1,5 @@
 ﻿using StudentInformation.BussinessEntity;
+using StudentInformation.Models;
 using StudentInformation.Service.Concreate;
 using StudentInformation.Service.Interface;
 using System;
@@ -22,9 +23,14 @@ namespace StudentInformation.Controllers
 
         [Route("getProduct")]
         [HttpGet]
-        public List<ProductViewModel> getAllProduct(int productID)
+        public List<ProductViewModel> getAllProduct()
         {
+            MyData myData = new MyData();
+
+            myData.Data = new List<ProductViewModel>();
+
             return producrService.GetProducts();
+            
         }
 
         [Route("addProduct")]
