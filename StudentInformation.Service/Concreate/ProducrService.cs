@@ -22,21 +22,16 @@ namespace StudentInformation.Service.Concreate
         }
         public List<ProductViewModel> GetProducts()
         {
-            
+           
+
             var mydata = productRepositroy.GetProducts();
 
-            var mynewData = mydata.Select(y => new ProductViewModel
-            {
-               
-                ProductDescription = y.ProductName,
-                ProductName = y.ProductName,
-                ProductID = y.ProductID
-                
+            var destination = Mapping.Mapper.Map<List<ProductViewModel>>(mydata);
 
-            }).ToList();
-            
 
-            return mynewData;
+           
+
+            return destination;
 
         }
 

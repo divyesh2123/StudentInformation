@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace StudentInformation.BussinessEntity
     {
         public int ProductID { get; set; }
 
-        [Range(0,99,ErrorMessage ="please enter proper range for categoryId")]
+        [JsonIgnore]
+        
         public int CategoryID { get; set; }
 
         [Required(ErrorMessage ="Please enter productName")]
